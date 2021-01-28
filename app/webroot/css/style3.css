@@ -1,0 +1,129 @@
+/*Autor Josue Perez IUT*/
+.titulo
+{
+	/*width:103.5%;*/
+	height:40px;
+	background:#357DAE;
+	background:-webkit-gradient(linear, 10% 56%, 10% 21%, from(#3F86BA), to(#327AAA));
+	background:-moz-linear-gradient(53% 55% 92deg, #3F86BA, #327AAA 36%);
+	background:-o-linear-gradient(53% 55% 92deg, #3F86BA, #327AAA 36%);
+	/* queria este color para la plantilla pero david no lo quiso ni ver*/
+	/*background:-webkit-gradient(linear, 10% 56%, 10% 21%, from(#975B26), to(#D59D40));
+	background:-moz-linear-gradient(53% 55% 92deg, #975B26, #D59D40 36%);
+	background:-o-linear-gradient(53% 55% 92deg, #975B26, #D59D40 36%);
+	background:-ms-linear-gradient(53% 55% 92deg, #975B26, #D59D40 36%);*/
+	color:#FFF;
+	border-radius:20px 20px 0px 0px;
+	box-shadow:5px 5px 10px hsla(0,0%,0%,.3);
+	margin:0px;
+	text-align:center;
+}
+.tituloPortada
+{
+	/*width:103.5%;*/
+	height:40px;
+	background:#357DAE;
+	background:-webkit-gradient(linear, 10% 56%, 10% 21%, from(#3F86BA), to(#327AAA));
+	background:-moz-linear-gradient(53% 55% 92deg, #3F86BA, #327AAA 36%);
+	background:-o-linear-gradient(53% 55% 92deg, #3F86BA, #327AAA 36%);
+	/* queria este color para la plantilla pero david no lo quiso ni ver*/
+	/*background:-webkit-gradient(linear, 10% 56%, 10% 21%, from(#975B26), to(#D59D40));
+	background:-moz-linear-gradient(53% 55% 92deg, #975B26, #D59D40 36%);
+	background:-o-linear-gradient(53% 55% 92deg, #975B26, #D59D40 36%);
+	background:-ms-linear-gradient(53% 55% 92deg, #975B26, #D59D40 36%);*/
+	color:#FFF;
+	border-radius:20px 20px 0px 0px;
+	box-shadow:5px 5px 10px hsla(0,0%,0%,.3);
+	margin:0px;
+	text-align:center;
+}
+.gradiente{
+	border-top-color:#00F;
+	min-height:42px;
+	padding:10px 15px 5px 15px;/*para que luego de lo redondeado no quede texto fuera en la esquina*/
+	background-color:hsla(0,0%,100%,.4);
+	border-radius:0px 0px 20px 20px;
+	height: auto;
+	/*width: 100%;*/
+	-moz-box-shadow:5px 5px 10px hsla(0,0%,0%,.3);/*Codigo para la sombra*/
+	-webkit-box-shadow:5px 5px 10px hsla(0,0%,0%,3);
+	-o-box-shadow:5px 5px 10px hsla(0,0%,0%,.3);/*Codigo para la sombra*/
+	-ms-box-shadow:5px 5px 10px hsla(0,0%,0%,.3);/*Codigo para la sombra*/
+	box-shadow:5px 5px 10px hsla(0,0%,0%,.3);
+	-webkit-transition:all .3s ease-in;
+	-o-transition:all .3s ease-in;
+	-moz-transition:all .3s ease-in;
+	-ms-transition:all .3s ease-in;
+	transition:all .3s ease-in;
+
+}
+.subTitulo
+{
+	width:50%;
+	height:40px;
+	background:#357DAE;
+	background:-webkit-gradient(linear, 10% 56%, 10% 21%, from(#3F86BA), to(#327AAA));
+	background:-moz-linear-gradient(53% 55% 92deg, #3F86BA, #327AAA 36%);
+	background:-o-linear-gradient(53% 55% 92deg, #3F86BA, #327AAA 36%);
+	color:#FFF;
+	border-radius:10px 10px 0px 0px;
+	box-shadow:5px 5px 10px hsla(0,0%,0%,.3);
+	margin:0px;
+	text-align:center;
+}
+
+
+
+
+
+.gradiente:hover
+{
+	/*box-shadow:8px 8px 10px hsla(0,0%,0%,.3);*/
+	box-shadow:8px 8px 10px hsla(205, 50%, 48%,.3);
+}
+.gradiente a 
+{	
+	text-decoration: none;
+	font-size:80%;
+}
+/*Para mostrar la session de usuario*/
+.gradiente table tr td
+{
+	/*background-color:#F00;
+	border-bottom:none;*/
+}
+#fichaUsuario{
+position:fixed;
+border-color:#FF0000;
+left:77%;
+top:-125px;
+width:280px;
+height:170px;
+padding-left:0px;
+padding-top:10px;
+background-color:hsla(0,0%,100%,.3);
+border-radius:0px 0px 20px 20px;
+z-index:20;
+-moz-transition:all .5s ease;
+-webkit-transition:all .5s ease;
+-o-transition:all .5s ease;
+-ms-transition:all .5s ease;
+box-shadow:0px 2px 10px #000;
+}
+#fichaUsuario a{
+display:block;
+}
+#fichaUsuario:hover{
+top:2px;
+border-radius:0px 0px 20px 20px;
+}
+.content h2{/* CSS para la el titulo del contenido*/
+	font-size: 24px;
+	margin-top: 10px;
+	color:hsla(0,0%,100%,.9);
+	text-shadow: 0px 2px 2px rgba(0,0,0,1), 0px 9px 3px rgba(102,102,102,.5);
+}
+.manita
+{
+	cursor:pointer;
+}

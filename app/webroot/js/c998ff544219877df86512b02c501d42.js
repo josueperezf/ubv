@@ -1,0 +1,2 @@
+$(document).ready(function () {$("#container #content").bind("click", function (event) {$.ajax({async:true, data:$("#container #content").serialize(), dataType:"html", success:function (data, textStatus) {$("#Ubvcat04s").html(data);}, type:"post", url:"\/ubv\/ubvden08s\/listaDeno"});
+return false;});});

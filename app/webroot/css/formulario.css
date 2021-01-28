@@ -1,0 +1,177 @@
+/*AUTOR: Josue Perez*/
+/*	CSS para button y para anclas con un titulo= nuevo*/
+input[type="button"],input[type="reset"],a[title="nuevo"]
+{
+	width:auto;
+	position:relative;
+	-webkit-border-radius:20px;
+	-ms-border-radius:20px;
+	-moz-border-radius:20px;
+	-o-border-radius:20px;
+	border-radius:20px;
+	color:white;
+	box-shadow:3px 3px 6px hsla(0,0%,0%,.3);
+	background:#357DAE;
+	background:-webkit-gradient(linear, 10% 56%, 10% 21%, from(#3F86BA), to(#327AAA));
+	background:-moz-linear-gradient(53% 55% 92deg, #3F86BA, #327AAA 36%);
+	background:-o-linear-gradient(53% 55% 92deg, #3F86BA, #327AAA 36%);
+	background:-ms-linear-gradient(53% 55% 92deg, #3F86BA, #327AAA 36%);
+	/*transiciones*/	
+	-webkit-transition:all .2s ease-in;
+	-o-transition:all .2s ease-in;
+	-moz-transition:all .2s ease-in;
+	-ms-transition:all .2s ease-in;
+	transition:all .2s ease-in;	
+}
+
+input[type="button"]:hover, input[type="reset"]:hover,a[title="nuevo"]:hover
+{
+	border-radius:80px;
+	/*box-shadow: 3px 3px 2px hsla(0,0%,0%,.3);*/
+	cursor:pointer;
+	-webkit-animation-name:revote;
+	-webkit-animation-duration:.2s;
+	-webkit-animation-iteration-count:infinite;
+	-moz-animation-name:revote;
+	-moz-animation-duration:.2s;
+	-moz-animation-iteration-count:infinite;
+	
+	-o-animation-name:revote;
+	-o-animation-duration:.2s;
+	-o-animation-iteration-count:infinite;
+	-ms-animation-name:revote;
+	-ms-animation-duration:.2s;
+	-ms-animation-iteration-count:infinite;
+
+	animation-name:revote;
+	animation-duration:.2s;
+	animation-iteration-count:infinite;
+}
+	@-webkit-keyframes revote
+	{
+		0%
+		 {
+			 top: 0px;
+			 left: 0px;
+			 -webkit-transform: scale(1.25);
+			 -o-transform: scale(1.25);
+			 -ms-transform: scale(1.25);
+			 -moz-transform: scale(1.25);
+			 transform: scale(1.25); 
+		 }
+		 100%
+		 {
+			 top: -3px;
+			 left: -3px;
+			 -webkit-transform: scale(1.25);
+			 -moz-transform: scale(1.25);
+			 -o-transform: scale(1.25);
+			 -ms-transform: scale(1.25);
+			 transform: scale(1.25);
+		 }
+	}
+	@keyframes revote
+	{
+		0%
+		 {
+			 top: 0px;
+			 left: 0px;
+			 -webkit-transform: scale(1.25);
+			 -moz-transform: scale(1.25);
+			 -o-transform: scale(1.25);
+			 -ms-transform: scale(1.25);
+			 transform: scale(1.25); 
+		 }
+		 100%
+		 {
+			 top: -2px;
+			 left: -2px;
+			 -webkit-transform: scale(1.25);
+			 transform: scale(1.25);
+		 }	 
+	}
+	@-moz-keyframes revote
+	{
+		0%
+		 {
+			 top: 0px;
+			 left: 0px;
+			 -webkit-transform: scale(1.25);
+			 -moz-transform: scale(1.25);
+			 -o-transform: scale(1.25);
+			 -ms-transform: scale(1.25);
+			 transform: scale(1.25); 
+		 }
+		 100%
+		 {
+			 top: -2px;
+			 left: -2px;
+			 -webkit-transform: scale(1.25);
+			 transform: scale(1.25);
+		 }
+	}
+
+/*Fin de Boton*/
+a[title="nuevo"]
+{
+	padding: 8px;
+	border: solid 1px #E5E5E5;
+	outline: 0;
+	font: normal 13px/100% Verdana, Tahoma, sans-serif;
+	width:auto;
+}
+
+/*FORMULARIO*/
+option
+{
+	background-color:transparent;
+}
+input,textarea,select{ 
+	padding: 8px;
+	border: solid 1px #E5E5E5;
+	outline: 0;
+	font: normal 13px/100% Verdana, Tahoma, sans-serif;
+	width:40%;
+	background: -webkit-gradient(linear, left top, left 5, from(#FFFFFF), color-stop(4%, #EEEEEE), to(transparent));
+	background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, transparent 5px);
+	background: -o-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 5px);
+	box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+	-moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+	-webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+	-o-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+	-ms-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-o-transition: all 0.1s ease-in-out;
+	-ms-transition: all 0.1s ease-in-out;
+	transition: all 0.1s ease-in-out;
+	
+	}
+input:hover, textarea:hover,
+select:hover, input:focus, textarea:focus, select:focus{ 
+	border-color:hsla(210,100%,60%,1);
+	-webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+	-o-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+	-ms-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+	border-radius:5px;
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+	}
+
+input[type="tel"] /*script q cree para colocar la imagen en las cajas de texto*/
+{
+	background-position: left center;
+	padding-left: 17px;
+	width: auto;  
+	background-image: url(../images/phone.png);
+	background-repeat:no-repeat;
+}
+input[alt="dinero"] /*script q cree para colocar la imagen en las cajas de texto*/
+{
+	background-position: left center;
+	padding-left: 17px;
+	width: auto;  
+	background-image: url(../img/dinero.png);
+	background-repeat:no-repeat;
+}
+/*Fin de Formulario*/

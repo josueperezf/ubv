@@ -1,0 +1,2 @@
+$(document).ready(function () {$("#ubvuad09_id").bind("change", function (event) {$.ajax({async:true, data:$("#ubvuad09_id").serialize(), dataType:"html", success:function (data, textStatus) {$("#divDus").html(data);}, type:"post", url:"\/ubv\/Ubvdus10\/add"});
+return false;});});

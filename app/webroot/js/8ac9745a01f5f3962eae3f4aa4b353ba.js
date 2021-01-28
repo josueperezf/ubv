@@ -1,0 +1,2 @@
+$(document).ready(function () {$("#Ubvsub06").bind("change", function (event) {$.ajax({async:true, data:$("#Ubvsub06").serialize(), dataType:"html", success:function (data, textStatus) {$("#divCat").html(data);}, type:"post", url:"\/ubv\/ubvbie12s\/repArticulo"});
+return false;});});

@@ -1,0 +1,2 @@
+$(document).ready(function () {$("#Ubvcat04s").bind("change", function (event) {$.ajax({async:true, data:$("#Ubvcat04s").closest("form").serialize(), dataType:"html", success:function (data, textStatus) {$("#denominacion").html(data);}, type:"post", url:"\/ubv\/ubvden08s\/listaDeno"});
+return false;});});

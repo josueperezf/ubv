@@ -1,0 +1,1705 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.1
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 24-09-2013 a las 17:17:26
+-- Versión del servidor: 5.5.24-log
+-- Versión de PHP: 5.3.13
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de datos: `ubv`
+--
+CREATE DATABASE `ubv` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `ubv`;
+
+DELIMITER $$
+--
+-- Funciones
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `countBienSub`(p_idSub BIGINT) RETURNS int(11)
+BEGIN
+  DECLARE total INT DEFAULT 0;
+  SELECT COUNT(b.id) into total FROM ubvsub06s AS s,ubvuad09s AS u,ubvdus10s as d,ubvbie12s as b WHERE s.id=p_idSub and
+u.ubvsub06_id =s.id and d.ubvuad09_id = u.id and  b.ubvdus10_id = d.id;
+  RETURN total;
+END$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `acos`
+--
+
+CREATE TABLE IF NOT EXISTS `acos` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) DEFAULT NULL,
+  `model` varchar(255) DEFAULT NULL,
+  `foreign_key` int(10) DEFAULT NULL,
+  `alias` varchar(255) DEFAULT NULL,
+  `lft` int(10) DEFAULT NULL,
+  `rght` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=92 ;
+
+--
+-- Volcado de datos para la tabla `acos`
+--
+
+INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
+(1, NULL, NULL, NULL, 'controllers', 1, 182),
+(2, 1, NULL, NULL, 'Groups', 2, 13),
+(3, 2, NULL, NULL, 'index', 3, 4),
+(4, 2, NULL, NULL, 'view', 5, 6),
+(5, 2, NULL, NULL, 'add', 7, 8),
+(6, 2, NULL, NULL, 'edit', 9, 10),
+(7, 2, NULL, NULL, 'delete', 11, 12),
+(8, 1, NULL, NULL, 'Pages', 14, 17),
+(9, 8, NULL, NULL, 'display', 15, 16),
+(10, 1, NULL, NULL, 'Ubvbie12s', 18, 39),
+(11, 10, NULL, NULL, 'index', 19, 20),
+(12, 10, NULL, NULL, 'view', 21, 22),
+(13, 10, NULL, NULL, 'add', 23, 24),
+(14, 10, NULL, NULL, 'edit', 25, 26),
+(15, 10, NULL, NULL, 'delete', 27, 28),
+(16, 10, NULL, NULL, 'addAjax', 29, 30),
+(17, 10, NULL, NULL, 'actualizarMarca', 31, 32),
+(18, 10, NULL, NULL, 'consultarBien', 33, 34),
+(19, 10, NULL, NULL, 'validar_nombre', 35, 36),
+(20, 10, NULL, NULL, 'pdfAsignacion', 37, 38),
+(21, 1, NULL, NULL, 'Ubvcar05s', 40, 43),
+(22, 21, NULL, NULL, 'listCargo', 41, 42),
+(23, 1, NULL, NULL, 'Ubvden08s', 44, 47),
+(24, 23, NULL, NULL, 'listaDeno', 45, 46),
+(25, 1, NULL, NULL, 'Ubvdtm07s', 48, 51),
+(26, 25, NULL, NULL, 'listRaz', 49, 50),
+(27, 1, NULL, NULL, 'Ubvdus10s', 52, 75),
+(28, 27, NULL, NULL, 'index', 53, 54),
+(29, 27, NULL, NULL, 'view', 55, 56),
+(30, 27, NULL, NULL, 'add', 57, 58),
+(31, 27, NULL, NULL, 'edit', 59, 60),
+(32, 27, NULL, NULL, 'delete', 61, 62),
+(33, 27, NULL, NULL, 'validar_nombre', 63, 64),
+(34, 27, NULL, NULL, 'listDus', 65, 66),
+(35, 27, NULL, NULL, 'listDus2', 67, 68),
+(36, 27, NULL, NULL, 'listDus3', 69, 70),
+(37, 27, NULL, NULL, 'inventario', 71, 72),
+(38, 27, NULL, NULL, 'pdfInventario', 73, 74),
+(39, 1, NULL, NULL, 'Ubvmar01s', 76, 91),
+(40, 39, NULL, NULL, 'index', 77, 78),
+(41, 39, NULL, NULL, 'view', 79, 80),
+(42, 39, NULL, NULL, 'add', 81, 82),
+(43, 39, NULL, NULL, 'addPrincipal', 83, 84),
+(44, 39, NULL, NULL, 'edit', 85, 86),
+(45, 39, NULL, NULL, 'delete', 87, 88),
+(46, 39, NULL, NULL, 'validar_nombre', 89, 90),
+(47, 1, NULL, NULL, 'Ubvmov13s', 92, 113),
+(48, 47, NULL, NULL, 'index', 93, 94),
+(49, 47, NULL, NULL, 'view', 95, 96),
+(50, 47, NULL, NULL, 'add', 97, 98),
+(51, 47, NULL, NULL, 'edit', 99, 100),
+(52, 47, NULL, NULL, 'delete', 101, 102),
+(53, 47, NULL, NULL, 'depDestino', 103, 104),
+(54, 47, NULL, NULL, 'operacionExitosa', 105, 106),
+(55, 47, NULL, NULL, 'movimientoM', 107, 108),
+(56, 47, NULL, NULL, 'listarFechas', 109, 110),
+(57, 47, NULL, NULL, 'pdfMensual', 111, 112),
+(58, 1, NULL, NULL, 'Ubvper11s', 114, 127),
+(59, 58, NULL, NULL, 'index', 115, 116),
+(60, 58, NULL, NULL, 'view', 117, 118),
+(61, 58, NULL, NULL, 'add', 119, 120),
+(62, 58, NULL, NULL, 'edit', 121, 122),
+(63, 58, NULL, NULL, 'delete', 123, 124),
+(64, 58, NULL, NULL, 'validar_nombre', 125, 126),
+(65, 1, NULL, NULL, 'Ubvsub06s', 128, 143),
+(66, 65, NULL, NULL, 'index', 129, 130),
+(67, 65, NULL, NULL, 'view', 131, 132),
+(68, 65, NULL, NULL, 'add', 133, 134),
+(69, 65, NULL, NULL, 'edit', 135, 136),
+(70, 65, NULL, NULL, 'delete', 137, 138),
+(71, 65, NULL, NULL, 'validar_nombre', 139, 140),
+(72, 65, NULL, NULL, 'listSub', 141, 142),
+(73, 1, NULL, NULL, 'Ubvuad09s', 144, 163),
+(74, 73, NULL, NULL, 'index', 145, 146),
+(75, 73, NULL, NULL, 'view', 147, 148),
+(76, 73, NULL, NULL, 'add', 149, 150),
+(77, 73, NULL, NULL, 'edit', 151, 152),
+(78, 73, NULL, NULL, 'delete', 153, 154),
+(79, 73, NULL, NULL, 'validar_nombre', 155, 156),
+(80, 73, NULL, NULL, 'listUad', 157, 158),
+(81, 73, NULL, NULL, 'listMov', 159, 160),
+(82, 73, NULL, NULL, 'listMovd', 161, 162),
+(83, 1, NULL, NULL, 'Users', 164, 179),
+(84, 83, NULL, NULL, 'index', 165, 166),
+(85, 83, NULL, NULL, 'view', 167, 168),
+(86, 83, NULL, NULL, 'add', 169, 170),
+(87, 83, NULL, NULL, 'edit', 171, 172),
+(88, 83, NULL, NULL, 'delete', 173, 174),
+(89, 83, NULL, NULL, 'login', 175, 176),
+(90, 83, NULL, NULL, 'logout', 177, 178),
+(91, 1, NULL, NULL, 'AclExtras', 180, 181);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `aros`
+--
+
+CREATE TABLE IF NOT EXISTS `aros` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) DEFAULT NULL,
+  `model` varchar(255) DEFAULT NULL,
+  `foreign_key` int(10) DEFAULT NULL,
+  `alias` varchar(255) DEFAULT NULL,
+  `lft` int(10) DEFAULT NULL,
+  `rght` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+
+--
+-- Volcado de datos para la tabla `aros`
+--
+
+INSERT INTO `aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
+(1, NULL, 'Group', 1, NULL, 1, 4),
+(2, NULL, 'Group', 2, NULL, 5, 20),
+(3, NULL, 'Group', 3, NULL, 21, 26),
+(4, 1, 'User', 1, NULL, 2, 3),
+(5, 2, 'User', 2, NULL, 6, 7),
+(6, 3, 'User', 3, NULL, 22, 23),
+(8, 2, 'User', 4, NULL, 8, 9),
+(9, 2, 'User', 5, NULL, 10, 11),
+(10, 2, 'User', 6, NULL, 12, 13),
+(11, 2, 'User', 7, NULL, 14, 15),
+(12, 2, 'User', 10, NULL, 16, 17),
+(13, 2, 'User', 2, NULL, 18, 19),
+(14, 3, 'User', 3, NULL, 24, 25);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `aros_acos`
+--
+
+CREATE TABLE IF NOT EXISTS `aros_acos` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `aro_id` int(10) NOT NULL,
+  `aco_id` int(10) NOT NULL,
+  `_create` varchar(2) NOT NULL DEFAULT '0',
+  `_read` varchar(2) NOT NULL DEFAULT '0',
+  `_update` varchar(2) NOT NULL DEFAULT '0',
+  `_delete` varchar(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ARO_ACO_KEY` (`aro_id`,`aco_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=113 ;
+
+--
+-- Volcado de datos para la tabla `aros_acos`
+--
+
+INSERT INTO `aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`, `_delete`) VALUES
+(1, 1, 1, '1', '1', '1', '1'),
+(2, 2, 1, '-1', '-1', '-1', '-1'),
+(3, 2, 11, '1', '1', '1', '1'),
+(4, 2, 12, '1', '1', '1', '1'),
+(5, 2, 13, '1', '1', '1', '1'),
+(6, 2, 14, '1', '1', '1', '1'),
+(7, 2, 16, '1', '1', '1', '1'),
+(8, 2, 17, '1', '1', '1', '1'),
+(9, 2, 18, '1', '1', '1', '1'),
+(10, 2, 19, '1', '1', '1', '1'),
+(11, 2, 20, '1', '1', '1', '1'),
+(12, 2, 22, '1', '1', '1', '1'),
+(13, 2, 28, '1', '1', '1', '1'),
+(14, 2, 29, '1', '1', '1', '1'),
+(15, 2, 30, '1', '1', '1', '1'),
+(16, 2, 31, '1', '1', '1', '1'),
+(17, 2, 34, '1', '1', '1', '1'),
+(18, 2, 35, '1', '1', '1', '1'),
+(19, 2, 36, '1', '1', '1', '1'),
+(20, 2, 37, '1', '1', '1', '1'),
+(21, 2, 33, '1', '1', '1', '1'),
+(22, 2, 38, '1', '1', '1', '1'),
+(23, 2, 40, '1', '1', '1', '1'),
+(24, 2, 41, '1', '1', '1', '1'),
+(25, 2, 42, '1', '1', '1', '1'),
+(26, 2, 44, '1', '1', '1', '1'),
+(27, 2, 43, '1', '1', '1', '1'),
+(28, 2, 46, '1', '1', '1', '1'),
+(29, 2, 48, '1', '1', '1', '1'),
+(30, 2, 49, '1', '1', '1', '1'),
+(31, 2, 50, '1', '1', '1', '1'),
+(32, 2, 53, '1', '1', '1', '1'),
+(33, 2, 54, '1', '1', '1', '1'),
+(34, 2, 55, '1', '1', '1', '1'),
+(35, 2, 56, '1', '1', '1', '1'),
+(36, 2, 57, '1', '1', '1', '1'),
+(37, 2, 59, '1', '1', '1', '1'),
+(38, 2, 60, '1', '1', '1', '1'),
+(39, 2, 61, '1', '1', '1', '1'),
+(40, 2, 62, '1', '1', '1', '1'),
+(41, 2, 64, '1', '1', '1', '1'),
+(42, 2, 66, '1', '1', '1', '1'),
+(43, 2, 67, '1', '1', '1', '1'),
+(44, 2, 68, '1', '1', '1', '1'),
+(45, 2, 69, '1', '1', '1', '1'),
+(46, 2, 71, '1', '1', '1', '1'),
+(47, 2, 72, '1', '1', '1', '1'),
+(48, 2, 74, '1', '1', '1', '1'),
+(49, 2, 75, '1', '1', '1', '1'),
+(50, 2, 76, '1', '1', '1', '1'),
+(51, 2, 77, '1', '1', '1', '1'),
+(52, 2, 79, '1', '1', '1', '1'),
+(53, 2, 80, '1', '1', '1', '1'),
+(54, 2, 81, '1', '1', '1', '1'),
+(55, 2, 82, '1', '1', '1', '1'),
+(56, 2, 84, '1', '1', '1', '1'),
+(57, 2, 85, '1', '1', '1', '1'),
+(58, 2, 86, '1', '1', '1', '1'),
+(59, 2, 87, '1', '1', '1', '1'),
+(60, 2, 89, '1', '1', '1', '1'),
+(61, 2, 90, '1', '1', '1', '1'),
+(62, 3, 1, '-1', '-1', '-1', '-1'),
+(63, 3, 11, '1', '1', '1', '1'),
+(64, 3, 12, '1', '1', '1', '1'),
+(65, 3, 13, '1', '1', '1', '1'),
+(66, 3, 14, '1', '1', '1', '1'),
+(67, 3, 16, '1', '1', '1', '1'),
+(68, 3, 17, '1', '1', '1', '1'),
+(69, 3, 18, '1', '1', '1', '1'),
+(70, 3, 19, '1', '1', '1', '1'),
+(71, 3, 20, '1', '1', '1', '1'),
+(72, 3, 22, '1', '1', '1', '1'),
+(73, 3, 28, '1', '1', '1', '1'),
+(74, 3, 29, '1', '1', '1', '1'),
+(75, 3, 34, '1', '1', '1', '1'),
+(76, 3, 35, '1', '1', '1', '1'),
+(77, 3, 36, '1', '1', '1', '1'),
+(78, 3, 37, '1', '1', '1', '1'),
+(79, 3, 38, '1', '1', '1', '1'),
+(80, 3, 40, '1', '1', '1', '1'),
+(81, 3, 41, '1', '1', '1', '1'),
+(82, 3, 42, '1', '1', '1', '1'),
+(83, 3, 44, '1', '1', '1', '1'),
+(84, 3, 43, '1', '1', '1', '1'),
+(85, 3, 46, '1', '1', '1', '1'),
+(86, 3, 48, '1', '1', '1', '1'),
+(87, 3, 49, '1', '1', '1', '1'),
+(88, 3, 50, '1', '1', '1', '1'),
+(89, 3, 53, '1', '1', '1', '1'),
+(90, 3, 54, '1', '1', '1', '1'),
+(91, 3, 55, '1', '1', '1', '1'),
+(92, 3, 56, '1', '1', '1', '1'),
+(93, 3, 57, '1', '1', '1', '1'),
+(94, 3, 66, '1', '1', '1', '1'),
+(95, 3, 67, '1', '1', '1', '1'),
+(96, 3, 72, '1', '1', '1', '1'),
+(97, 3, 74, '1', '1', '1', '1'),
+(98, 3, 75, '1', '1', '1', '1'),
+(99, 3, 80, '1', '1', '1', '1'),
+(100, 3, 81, '1', '1', '1', '1'),
+(101, 3, 82, '1', '1', '1', '1'),
+(102, 3, 84, '1', '1', '1', '1'),
+(103, 3, 85, '1', '1', '1', '1'),
+(104, 3, 87, '1', '1', '1', '1'),
+(105, 3, 89, '1', '1', '1', '1'),
+(106, 3, 90, '1', '1', '1', '1'),
+(107, 2, 26, '1', '1', '1', '1'),
+(108, 3, 26, '1', '1', '1', '1'),
+(109, 2, 24, '1', '1', '1', '1'),
+(110, 3, 24, '1', '1', '1', '1'),
+(111, 2, 3, '1', '1', '1', '1'),
+(112, 3, 3, '1', '1', '1', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `groups`
+--
+
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `groups`
+--
+
+INSERT INTO `groups` (`id`, `name`, `created`, `modified`) VALUES
+(1, 'JL-administrator', '2013-07-06 14:16:45', '2013-07-06 14:16:45'),
+(2, 'ADMINISTRADOR', '2013-07-06 14:17:07', '2013-07-06 14:17:07'),
+(3, 'BASICO', '2013-07-06 14:17:29', '2013-07-06 14:17:29');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvbie12s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvbie12s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ubvden08_id` int(10) unsigned NOT NULL,
+  `ubvdus10_id` int(10) unsigned NOT NULL,
+  `ubvmar01_id` int(10) unsigned NOT NULL,
+  `codigo` varchar(20) DEFAULT NULL,
+  `serial` varchar(20) DEFAULT NULL,
+  `monto` float DEFAULT NULL,
+  `descripcion` varchar(200) DEFAULT NULL,
+  `estatus` varchar(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ubvbie12s_FKIndex1` (`ubvmar01_id`),
+  KEY `ubvbie12s_FKIndex2` (`ubvdus10_id`),
+  KEY `ubvbie12s_FKIndex3` (`ubvden08_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+
+--
+-- Volcado de datos para la tabla `ubvbie12s`
+--
+
+INSERT INTO `ubvbie12s` (`id`, `ubvden08_id`, `ubvdus10_id`, `ubvmar01_id`, `codigo`, `serial`, `monto`, `descripcion`, `estatus`) VALUES
+(1, 1, 6, 1, '1234', 'jl-1234', 4321, 'Amplificador de señal de red inalambrica', '0'),
+(2, 67, 3, 3, '55', 'jl-55', 300, 'en buen estado', '1'),
+(3, 67, 5, 3, '66', 'jl-66', 66, 'en buen estado', '1'),
+(4, 5, 5, 1, '99', 'jl-99', 6000, 'nuevo', '1'),
+(5, 5, 5, 5, '3390', 'jl-90', 9000, '', '1'),
+(6, 5, 5, 5, '3391', 'jl-3391', 9000, 'nada', '1'),
+(7, 16, 2, 3, '3392', 'jl-3392', 12000, '', '1'),
+(8, 77, 2, 6, '18419', 'jl-18419', 5000, '', '1'),
+(9, 77, 5, 6, '184190', 'jl-18419039', 6000, '', '1'),
+(10, 84, 5, 2, '1841903', 'jl-1841903', 3000, '', '1'),
+(11, 1, 2, 5, '123', 'jl-123', 123, 'fea', '1'),
+(12, 38, 2, 5, '123456', 'JL-123456', 10000, 'descripción del bien', '1'),
+(13, 2, 5, 2, '12398', '123', 123, '1', '1'),
+(14, 7, 1, 2, '100', '', 100, '', '1');
+
+--
+-- Disparadores `ubvbie12s`
+--
+DROP TRIGGER IF EXISTS `tginsertbie`;
+DELIMITER //
+CREATE TRIGGER `tginsertbie` AFTER INSERT ON `ubvbie12s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'INSERT',NOW(),'ubvbie12s',new.id);
+    END
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tgupdatebie`;
+DELIMITER //
+CREATE TRIGGER `tgupdatebie` AFTER UPDATE ON `ubvbie12s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'UPDATE',NOW(),'ubvbie12s',old.id);
+    END
+//
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvbit16s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvbit16s` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `usuario` varchar(40) DEFAULT NULL,
+  `servidor` varchar(30) NOT NULL,
+  `operacion` varchar(50) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `tabla` varchar(80) NOT NULL,
+  `campo_id` float NOT NULL,
+  `campo2_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=189 ;
+
+--
+-- Volcado de datos para la tabla `ubvbit16s`
+--
+
+INSERT INTO `ubvbit16s` (`id`, `user_id`, `usuario`, `servidor`, `operacion`, `fecha`, `tabla`, `campo_id`, `campo2_id`) VALUES
+(1, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 16:41:29', 'ubvuad09s', 1, 0),
+(2, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 16:41:45', 'ubvdus10s', 1, 0),
+(3, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 16:42:56', 'ubvper11s', 1, 0),
+(4, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 16:43:26', 'ubvuad09s', 2, 0),
+(5, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 16:43:50', 'ubvdus10s', 2, 0),
+(6, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 16:47:21', 'ubvper11s', 2, 0),
+(7, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-26 16:48:17', 'ubvper11s', 2, 0),
+(8, 0, '', 'localhost', 'UPDATE', '2013-08-26 16:48:47', 'users', 2, 0),
+(9, 0, '', 'localhost', 'UPDATE', '2013-08-26 16:48:59', 'users', 1, 0),
+(10, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 16:53:17', 'ubvsub06s', 4, 0),
+(11, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-26 16:54:37', 'ubvsub06s', 4, 0),
+(12, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-26 16:55:40', 'ubvsub06s', 4, 0),
+(13, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 16:58:36', 'ubvuad09s', 3, 0),
+(14, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-26 16:59:14', 'ubvuad09s', 1, 0),
+(15, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 17:00:23', 'ubvuad09s', 4, 0),
+(16, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 17:00:47', 'ubvdus10s', 3, 0),
+(17, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 17:01:04', 'ubvdus10s', 4, 0),
+(18, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 17:01:30', 'ubvdus10s', 5, 0),
+(19, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 17:02:55', 'ubvmar01s', 2, 0),
+(20, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 17:04:54', 'ubvper11s', 3, 0),
+(21, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-26 17:05:35', 'ubvper11s', 4, 0),
+(22, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-27 13:43:22', 'ubvbie12s', 1, 0),
+(23, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-27 13:43:22', 'ubvmov13s', 1, 0),
+(24, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-27 13:43:22', 'ubvdus10s_ubvmov13s', 1, 1),
+(25, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-27 13:43:22', 'ubvdmo14s', 1, 0),
+(26, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-27 16:21:18', 'ubvmar01s', 3, 0),
+(27, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-27 16:22:14', 'ubvbie12s', 2, 0),
+(28, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-27 16:22:15', 'ubvmov13s', 2, 0),
+(29, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-27 16:22:15', 'ubvdus10s_ubvmov13s', 1, 2),
+(30, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-27 16:22:15', 'ubvdmo14s', 2, 0),
+(31, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-27 16:22:51', 'ubvbie12s', 3, 0),
+(32, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-27 16:22:51', 'ubvdmo14s', 3, 0),
+(33, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:40:41', 'ubvmar01s', 4, 0),
+(34, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:41:44', 'ubvbie12s', 4, 0),
+(35, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:41:44', 'ubvmov13s', 3, 0),
+(36, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:41:44', 'ubvdus10s_ubvmov13s', 1, 3),
+(37, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:41:45', 'ubvdmo14s', 4, 0),
+(38, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:56:34', 'ubvmar01s', 5, 0),
+(39, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:57:35', 'ubvbie12s', 5, 0),
+(40, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:57:35', 'ubvmov13s', 4, 0),
+(41, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:57:35', 'ubvdus10s_ubvmov13s', 1, 4),
+(42, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:57:35', 'ubvdmo14s', 5, 0),
+(43, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:58:38', 'ubvbie12s', 6, 0),
+(44, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:58:38', 'ubvdmo14s', 6, 0),
+(45, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:59:27', 'ubvbie12s', 7, 0),
+(46, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 09:59:27', 'ubvdmo14s', 7, 0),
+(47, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 10:01:17', 'ubvbie12s', 4, 0),
+(48, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:01:17', 'ubvmov13s', 5, 0),
+(49, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:01:17', 'ubvdus10s_ubvmov13s', 1, 5),
+(50, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:01:17', 'ubvdmo14s', 8, 0),
+(51, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:07:36', 'ubvmov13s', 6, 0),
+(52, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:07:36', 'ubvdus10s_ubvmov13s', 1, 6),
+(53, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:07:36', 'ubvdus10s_ubvmov13s', 5, 6),
+(54, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:07:36', 'ubvdmo14s', 9, 0),
+(55, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 10:07:36', 'ubvbie12s', 5, 0),
+(56, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:07:36', 'ubvdmo14s', 10, 0),
+(57, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 10:07:36', 'ubvbie12s', 2, 0),
+(58, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:11:30', 'ubvper11s', 5, 0),
+(59, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:15:11', 'ubvmov13s', 7, 0),
+(60, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:15:11', 'ubvdus10s_ubvmov13s', 1, 7),
+(61, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:15:11', 'ubvdus10s_ubvmov13s', 5, 7),
+(62, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:15:11', 'ubvdmo14s', 11, 0),
+(63, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 10:15:11', 'ubvbie12s', 3, 0),
+(64, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 10:15:11', 'ubvdmo14s', 12, 0),
+(65, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 10:15:11', 'ubvbie12s', 1, 0),
+(66, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:40:00', 'ubvmov13s', 8, 0),
+(67, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:40:00', 'ubvdus10s_ubvmov13s', 5, 8),
+(68, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:40:00', 'ubvdus10s_ubvmov13s', 1, 8),
+(69, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:40:00', 'ubvdmo14s', 13, 0),
+(70, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 11:40:00', 'ubvbie12s', 1, 0),
+(71, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:40:00', 'ubvdmo14s', 14, 0),
+(72, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 11:40:00', 'ubvbie12s', 2, 0),
+(73, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:40:00', 'ubvdmo14s', 15, 0),
+(74, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 11:40:00', 'ubvbie12s', 3, 0),
+(75, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:40:00', 'ubvdmo14s', 16, 0),
+(76, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 11:40:00', 'ubvbie12s', 5, 0),
+(77, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:41:19', 'ubvmov13s', 9, 0),
+(78, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:41:19', 'ubvdus10s_ubvmov13s', 1, 9),
+(79, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:41:20', 'ubvdus10s_ubvmov13s', 5, 9),
+(80, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:41:20', 'ubvdmo14s', 17, 0),
+(81, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 11:41:20', 'ubvbie12s', 1, 0),
+(82, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:41:20', 'ubvdmo14s', 18, 0),
+(83, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 11:41:20', 'ubvbie12s', 2, 0),
+(84, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:41:20', 'ubvdmo14s', 19, 0),
+(85, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 11:41:20', 'ubvbie12s', 3, 0),
+(86, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:41:20', 'ubvdmo14s', 20, 0),
+(87, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 11:41:20', 'ubvbie12s', 5, 0),
+(88, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 11:41:20', 'ubvdmo14s', 21, 0),
+(89, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 11:41:20', 'ubvbie12s', 6, 0),
+(90, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 12:07:30', 'ubvmov13s', 10, 0),
+(91, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 12:07:30', 'ubvdus10s_ubvmov13s', 5, 10),
+(92, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 12:07:30', 'ubvdus10s_ubvmov13s', 1, 10),
+(93, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 12:07:30', 'ubvdmo14s', 22, 0),
+(94, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 12:07:30', 'ubvbie12s', 1, 0),
+(95, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 12:07:30', 'ubvdmo14s', 23, 0),
+(96, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 12:07:30', 'ubvbie12s', 2, 0),
+(97, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 12:07:30', 'ubvdmo14s', 24, 0),
+(98, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 12:07:30', 'ubvbie12s', 3, 0),
+(99, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 13:29:47', 'ubvmov13s', 11, 0),
+(100, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 13:29:47', 'ubvdus10s_ubvmov13s', 1, 11),
+(101, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 13:29:47', 'ubvdus10s_ubvmov13s', 5, 11),
+(102, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 13:29:47', 'ubvdmo14s', 25, 0),
+(103, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 13:29:47', 'ubvbie12s', 2, 0),
+(104, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 13:29:47', 'ubvdmo14s', 26, 0),
+(105, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 13:29:47', 'ubvbie12s', 4, 0),
+(106, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 13:29:47', 'ubvdmo14s', 27, 0),
+(107, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 13:29:47', 'ubvbie12s', 3, 0),
+(108, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 13:31:58', 'ubvbie12s', 2, 0),
+(109, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 13:31:59', 'ubvmov13s', 12, 0),
+(110, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 13:31:59', 'ubvdus10s_ubvmov13s', 5, 12),
+(111, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 13:31:59', 'ubvdmo14s', 28, 0),
+(112, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:23:56', 'ubvmar01s', 6, 0),
+(113, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:24:55', 'ubvbie12s', 8, 0),
+(114, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:24:55', 'ubvmov13s', 13, 0),
+(115, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:24:55', 'ubvdus10s_ubvmov13s', 1, 13),
+(116, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:24:55', 'ubvdmo14s', 29, 0),
+(117, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:25:58', 'ubvbie12s', 9, 0),
+(118, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:25:59', 'ubvdmo14s', 30, 0),
+(119, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:26:54', 'ubvbie12s', 10, 0),
+(120, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:26:54', 'ubvdmo14s', 31, 0),
+(121, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:30:43', 'ubvmov13s', 14, 0),
+(122, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:30:43', 'ubvdus10s_ubvmov13s', 1, 14),
+(123, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:30:43', 'ubvdus10s_ubvmov13s', 5, 14),
+(124, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:30:43', 'ubvdmo14s', 32, 0),
+(125, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 15:30:44', 'ubvbie12s', 9, 0),
+(126, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:30:44', 'ubvdmo14s', 33, 0),
+(127, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 15:30:44', 'ubvbie12s', 10, 0),
+(128, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 15:32:04', 'ubvbie12s', 10, 0),
+(129, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:32:04', 'ubvmov13s', 15, 0),
+(130, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:32:04', 'ubvdus10s_ubvmov13s', 5, 15),
+(131, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:32:04', 'ubvdmo14s', 34, 0),
+(132, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:33:41', 'ubvuad09s', 5, 0),
+(133, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:33:59', 'ubvdus10s', 6, 0),
+(134, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:35:25', 'ubvmov13s', 16, 0),
+(135, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:35:26', 'ubvdus10s_ubvmov13s', 1, 16),
+(136, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:35:26', 'ubvdus10s_ubvmov13s', 6, 16),
+(137, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-28 15:35:26', 'ubvdmo14s', 35, 0),
+(138, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-28 15:35:26', 'ubvbie12s', 1, 0),
+(139, 2, 'LEONARDO', 'localhost', 'UPDATE', '2013-08-29 11:53:51', 'ubvdus10s', 1, 0),
+(140, 2, 'LEONARDO', 'localhost', 'UPDATE', '2013-08-30 12:48:21', 'ubvper11s', 3, 0),
+(141, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-30 15:37:39', 'ubvbie12s', 11, 0),
+(142, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-30 15:37:39', 'ubvmov13s', 17, 0),
+(143, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-30 15:37:39', 'ubvdus10s_ubvmov13s', 1, 17),
+(144, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-30 15:37:39', 'ubvdmo14s', 36, 0),
+(145, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-30 16:05:51', 'ubvmov13s', 18, 0),
+(146, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-30 16:05:51', 'ubvdus10s_ubvmov13s', 1, 18),
+(147, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-30 16:05:51', 'ubvdus10s_ubvmov13s', 2, 18),
+(148, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-30 16:05:51', 'ubvdmo14s', 37, 0),
+(149, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-30 16:05:51', 'ubvbie12s', 7, 0),
+(150, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-30 16:05:51', 'ubvdmo14s', 38, 0),
+(151, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-30 16:05:51', 'ubvbie12s', 8, 0),
+(152, 1, 'JOSUE', 'localhost', 'INSERT', '2013-08-30 16:05:51', 'ubvdmo14s', 39, 0),
+(153, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-08-30 16:05:51', 'ubvbie12s', 11, 0),
+(154, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-01 10:04:02', 'ubvbie12s', 12, 0),
+(155, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-01 10:04:02', 'ubvmov13s', 19, 0),
+(156, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-01 10:04:02', 'ubvdus10s_ubvmov13s', 1, 19),
+(157, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-01 10:04:02', 'ubvdmo14s', 40, 0),
+(158, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-01 15:47:53', 'ubvmov13s', 20, 0),
+(159, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-01 15:47:53', 'ubvdus10s_ubvmov13s', 1, 20),
+(160, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-01 15:47:53', 'ubvdus10s_ubvmov13s', 2, 20),
+(161, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-01 15:47:53', 'ubvdmo14s', 41, 0),
+(162, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-09-01 15:47:53', 'ubvbie12s', 12, 0),
+(163, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-09-02 09:38:58', 'ubvper11s', 3, 0),
+(164, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-09-02 09:40:07', 'ubvper11s', 1, 0),
+(165, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-02 09:53:36', 'ubvmov13s', 21, 0),
+(166, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-02 09:53:36', 'ubvdus10s_ubvmov13s', 5, 21),
+(167, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-02 09:53:36', 'ubvdus10s_ubvmov13s', 1, 21),
+(168, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-02 09:53:36', 'ubvdmo14s', 42, 0),
+(169, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-09-02 09:53:36', 'ubvbie12s', 2, 0),
+(170, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-02 09:58:37', 'ubvmov13s', 22, 0),
+(171, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-02 09:58:37', 'ubvdus10s_ubvmov13s', 1, 22),
+(172, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-02 09:58:37', 'ubvdus10s_ubvmov13s', 3, 22),
+(173, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-02 09:58:37', 'ubvdmo14s', 43, 0),
+(174, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-09-02 09:58:37', 'ubvbie12s', 2, 0),
+(175, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-13 17:32:44', 'ubvbie12s', 13, 0),
+(176, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-13 17:32:44', 'ubvmov13s', 23, 0),
+(177, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-13 17:32:44', 'ubvdus10s_ubvmov13s', 1, 23),
+(178, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-13 17:32:44', 'ubvdmo14s', 44, 0),
+(179, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-15 09:10:17', 'ubvmov13s', 24, 0),
+(180, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-15 09:10:17', 'ubvdus10s_ubvmov13s', 1, 24),
+(181, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-15 09:10:17', 'ubvdus10s_ubvmov13s', 5, 24),
+(182, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-15 09:10:17', 'ubvdmo14s', 45, 0),
+(183, 1, 'JOSUE', 'localhost', 'UPDATE', '2013-09-15 09:10:17', 'ubvbie12s', 13, 0),
+(184, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-15 09:11:03', 'ubvbie12s', 14, 0),
+(185, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-15 09:11:03', 'ubvmov13s', 25, 0),
+(186, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-15 09:11:03', 'ubvdus10s_ubvmov13s', 1, 25),
+(187, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-15 09:11:03', 'ubvdmo14s', 46, 0),
+(188, 1, 'JOSUE', 'localhost', 'INSERT', '2013-09-23 17:38:33', 'users', 3, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvcar05s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvcar05s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `ubvcar05s`
+--
+
+INSERT INTO `ubvcar05s` (`id`, `nombre`) VALUES
+(1, 'Jefe de deped usuaria'),
+(2, 'Jefe de eje Cipriano Castro'),
+(3, 'Asistente');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvcat04s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvcat04s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(10) NOT NULL,
+  `nombre` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `ubvcat04s`
+--
+
+INSERT INTO `ubvcat04s` (`id`, `codigo`, `nombre`) VALUES
+(1, '16010', 'Equipos de telecomunicaciones'),
+(2, '18020', 'Equipos de enseñanza, deporte y recreación'),
+(3, '18060', 'Instrumentos musicales'),
+(4, '20010', 'Mobiliario y equipos de oficina'),
+(5, '20020', 'Equipos de procesamiento de datos '),
+(6, '20090', 'Mobiliario y equipos de alojamiento');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvcoo03s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvcoo03s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `ubvcoo03s`
+--
+
+INSERT INTO `ubvcoo03s` (`id`, `nombre`) VALUES
+(1, 'Tachira');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvden08s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvden08s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ubvcat04_id` int(10) unsigned NOT NULL,
+  `codigo` varchar(10) DEFAULT NULL,
+  `nombre` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ubvden08s_FKIndex1` (`ubvcat04_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=372 ;
+
+--
+-- Volcado de datos para la tabla `ubvden08s`
+--
+
+INSERT INTO `ubvden08s` (`id`, `ubvcat04_id`, `codigo`, `nombre`) VALUES
+(1, 1, '16010-0001', 'Amplificadores '),
+(2, 1, '16010-0002', 'Analizadoras '),
+(3, 1, '16010-0003', 'Antenas fácilmente desmontables '),
+(4, 1, '16010-0004', 'Centrales telefónicas manuales (ver conmutadores telefónicos) '),
+(5, 1, '16010-0005', 'Concentradores '),
+(6, 1, '16010-0006', 'Conmutadores telefónicos '),
+(7, 1, '16010-0007', 'Conmutadores telegráficos '),
+(8, 1, '16010-0008', 'Equipos de control remoto '),
+(9, 1, '16010-0009', 'Equipos de sloran '),
+(10, 1, '16010-0010', 'Equipos de luces de señales para torres de antena '),
+(11, 1, '16010-0011', 'Equipos de radar '),
+(12, 1, '16010-0012', 'Equipos de radiocomunicación portátiles '),
+(13, 1, '16010-0013', 'Equipos de comunicación interna (intercomunicadores) '),
+(14, 1, '16010-0014', 'Generadores de señales '),
+(15, 1, '16010-0015', 'Jacks panels '),
+(16, 1, '16010-0016', 'Manipuladores '),
+(17, 1, '16010-0017', 'Mesas para teleimpresoras '),
+(18, 1, '16010-0018', 'Micrófonos '),
+(19, 1, '16010-0019', 'Multicanales para telefonía '),
+(20, 1, '16010-0020', 'Multicanales para telegrafía '),
+(21, 1, '16010-0021', 'Pilas húmedas o de gravedad '),
+(22, 1, '16010-0022', 'Plantas eléctricas '),
+(23, 1, '16010-0023', 'Probadores de tubos electrónicos '),
+(24, 1, '16010-0024', 'Racks '),
+(25, 1, '16010-0025', 'Radioreceptores (ver receptores radioeléctricos) '),
+(26, 1, '16010-0026', 'Radiotransmisores (ver transmisores radioeléctricos) '),
+(27, 1, '16010-0027', 'Receptores radioeléctricos '),
+(28, 1, '16010-0028', 'Rectificadores '),
+(29, 1, '16010-0029', 'Teléfonos '),
+(30, 1, '16010-0030', 'Teleimpresoras '),
+(31, 1, '16010-0031', 'Teletipos '),
+(32, 1, '16010-0032', 'Transmisores radioeléctricos '),
+(33, 1, '16010-0033', 'Trazadores de señales '),
+(34, 1, '16010-0034', 'Voltímetros '),
+(35, 2, '18020-0001', 'Billares '),
+(36, 2, '18020-0002', 'Carteleras '),
+(37, 2, '18020-0003', 'Cátedras '),
+(38, 2, '18020-0004', 'Colecciones de animales disecados para la enseñanza '),
+(39, 2, '18020-0005', 'Colecciones de preparaciones microscópicas en estuche '),
+(40, 2, '18020-0006', 'Colecciones de minerales para la enseñanza '),
+(41, 2, '18020-0007', 'Cuadros murales '),
+(42, 2, '18020-0008', 'Discos educativos '),
+(43, 2, '18020-0009', 'Episcopios '),
+(44, 2, '18020-0010', 'Equipos instructivos '),
+(45, 2, '18020-0011', 'Equipos para deportes '),
+(46, 2, '18020-0012', 'Equipos para gimnasia y parques recreativos '),
+(47, 2, '18020-0013', 'Esferas celestes '),
+(48, 2, '18020-0014', 'Esferas terrestres '),
+(49, 2, '18020-0015', 'Herbarios '),
+(50, 2, '18020-0016', 'Juegos de sólidos geométricos '),
+(51, 2, '18020-0017', 'Juegos recreativos '),
+(52, 2, '18020-0018', 'Mapas murales '),
+(53, 2, '18020-0019', 'Máquinas disparadoras de skeet '),
+(54, 2, '18020-0020', 'Modelos didácticos '),
+(55, 2, '18020-0021', 'Pantallas de proyección '),
+(56, 2, '18020-0022', 'Películas educativas '),
+(57, 2, '18020-0023', 'Pizarrones '),
+(58, 2, '18020-0024', 'Proyectores de películas '),
+(59, 2, '18020-0025', 'Pupitres '),
+(60, 2, '18020-0026', 'Radio-receptores '),
+(61, 2, '18020-0027', 'Sillas pupitre '),
+(62, 2, '18020-0028', 'Televisores '),
+(63, 2, '18020-0029', 'Tocadiscos '),
+(64, 2, '18020-0030', 'Video grabador '),
+(65, 3, '18060-0001', 'Acordeones '),
+(66, 3, '18060-0002', 'Armonios '),
+(67, 3, '18060-0003', 'Arpas '),
+(68, 3, '18060-0004', 'Atriles '),
+(69, 3, '18060-0005', 'Bandola '),
+(70, 3, '18060-0006', 'Banjos '),
+(71, 3, '18060-0007', 'Baterías '),
+(72, 3, '18060-0008', 'Bugles '),
+(73, 3, '18060-0009', 'Bustos (excepto los situados en plazas públicas) '),
+(74, 3, '18060-0010', 'Celestes '),
+(75, 3, '18060-0011', 'Clarinetes '),
+(76, 3, '18060-0012', 'Clarines '),
+(77, 3, '18060-0013', 'Contrabajos '),
+(78, 3, '18060-0014', 'Cornetas '),
+(79, 3, '18060-0015', 'Cornetines '),
+(80, 3, '18060-0016', 'Cornos ingleses '),
+(81, 3, '18060-0017', 'Cuadros artísticos '),
+(82, 3, '18060-0018', 'Discos musicales '),
+(83, 3, '18060-0019', 'Estatuas (excepto las situadas en plazas públicas) '),
+(84, 3, '18060-0020', 'Flautas '),
+(85, 3, '18060-0021', 'Flautines '),
+(86, 3, '18060-0022', 'Guitarras '),
+(87, 3, '18060-0023', 'Joyas '),
+(88, 3, '18060-0024', 'Laúdes '),
+(89, 3, '18060-0025', 'Liras '),
+(90, 3, '18060-0026', 'Mandolas '),
+(91, 3, '18060-0027', 'Mandolinas '),
+(92, 3, '18060-0028', 'Metrónomos '),
+(93, 3, '18060-0029', 'Objetos ornamentales '),
+(94, 3, '18060-0030', 'Oboes '),
+(95, 3, '18060-0031', 'Órganos '),
+(96, 3, '18060-0032', 'Pianos '),
+(97, 3, '18060-0033', 'Platillos '),
+(98, 3, '18060-0034', 'Tambores '),
+(99, 3, '18060-0035', 'Timbales '),
+(100, 3, '18060-0036', 'Triángulos '),
+(101, 3, '18060-0037', 'Trombones '),
+(102, 3, '18060-0038', 'Trompas '),
+(103, 3, '18060-0039', 'Trompetas '),
+(104, 3, '18060-0040', 'Tubas '),
+(105, 3, '18060-0041', 'Redoblantes '),
+(106, 3, '18060-0042', 'Saxofones '),
+(107, 3, '18060-0043', 'Violas '),
+(108, 3, '18060-0044', 'Violines '),
+(109, 3, '18060-0045', 'Violoncelos '),
+(110, 3, '18060-0046', 'Xilófonos '),
+(111, 4, '20010-0001', 'Acondicionadores de aire '),
+(112, 4, '20010-0002', 'Alfombras '),
+(113, 4, '20010-0003', 'Anaqueles (ver estantes) '),
+(114, 4, '20010-0004', 'Archivadores de gavetas '),
+(115, 4, '20010-0005', 'Archivadores de puertas '),
+(116, 4, '20010-0006', 'Aspiradoras '),
+(117, 4, '20010-0007', 'Balanzas '),
+(118, 4, '20010-0008', 'Bancos (asientos) '),
+(119, 4, '20010-0009', 'Bancos (mesas) '),
+(120, 4, '20010-0010', 'Banderas nacionales '),
+(121, 4, '20010-0011', 'Bibliotecas '),
+(122, 4, '20010-0012', 'Borradores eléctricos '),
+(123, 4, '20010-0013', 'Burros (ver caballetes) '),
+(124, 4, '20010-0014', 'Caballetes '),
+(125, 4, '20010-0015', 'Cafeteras '),
+(126, 4, '20010-0016', 'Cajas fuertes '),
+(127, 4, '20010-0017', 'Cajas registradoras '),
+(128, 4, '20010-0018', 'Calculadoras '),
+(129, 4, '20010-0019', 'Carteleras '),
+(130, 4, '20010-0020', 'Carteleras '),
+(131, 4, '20010-0021', 'Ceniceros de pie '),
+(132, 4, '20010-0022', 'Cestas para botar papeles '),
+(133, 4, '20010-0023', 'Cestas para escritorios '),
+(134, 4, '20010-0024', 'Circuladores de aire '),
+(135, 4, '20010-0025', 'Compases '),
+(136, 4, '20010-0026', 'Comptómetros '),
+(137, 4, '20010-0027', 'Cortinas '),
+(138, 4, '20010-0028', 'Cortineros '),
+(139, 4, '20010-0029', 'Curvígrafos '),
+(140, 4, '20010-0030', 'Dictáfonos '),
+(141, 4, '20010-0031', 'Díngrafos '),
+(142, 4, '20010-0032', 'Dispensadores de cinta engomada '),
+(143, 4, '20010-0033', 'Enfriadores de agua '),
+(144, 4, '20010-0034', 'Engrapadoras '),
+(145, 4, '20010-0035', 'Escalímetros '),
+(146, 4, '20010-0036', 'Escaparates '),
+(147, 4, '20010-0037', 'Escritorios '),
+(148, 4, '20010-0038', 'Escuadras '),
+(149, 4, '20010-0039', 'Escudos nacionales '),
+(150, 4, '20010-0040', 'Espaciadores para máquinas de escribir '),
+(151, 4, '20010-0041', 'Estantes '),
+(152, 4, '20010-0042', 'Estenógrafos (máquinas) '),
+(153, 4, '20010-0043', 'Estuches de matemáticas '),
+(154, 4, '20010-0044', 'Estuches de plantillas '),
+(155, 4, '20010-0045', 'Ficheros (tarjeteros) '),
+(156, 4, '20010-0046', 'Fotocopiadoras '),
+(157, 4, '20010-0047', 'Gabinetes '),
+(158, 4, '20010-0048', 'Guillotinas para papel, manuales '),
+(159, 4, '20010-0049', 'Grabadores de sonido '),
+(160, 4, '20010-0050', 'Impresoras de rótulos '),
+(161, 4, '20010-0051', 'Juegos de instrumentos para dibujo '),
+(162, 4, '20010-0052', 'Juegos de muebles para recibo '),
+(163, 4, '20010-0053', 'Kardex '),
+(164, 4, '20010-0054', 'Lámparas móviles '),
+(165, 4, '20010-0055', 'Litografías montadas en marcos (ver cuadros) '),
+(166, 4, '20010-0056', 'Lockers (ver escaparates) '),
+(167, 4, '20010-0057', 'Maletines '),
+(168, 4, '20010-0058', 'Mapas montados en marcos (ver cuadros) '),
+(169, 4, '20010-0059', 'Mapotecas (ver planotecas) '),
+(170, 4, '20010-0060', 'Máquinas de contabilidad '),
+(171, 4, '20010-0061', 'Máquinas de escribir '),
+(172, 4, '20010-0062', 'Máquinas eléctricas y electrónicas de contabilidad '),
+(173, 4, '20010-0063', 'Máquinas foliadoras (ver numeradoras) '),
+(174, 4, '20010-0064', 'Máquinas franqueadoras de correspondencia '),
+(175, 4, '20010-0065', 'Mesas '),
+(176, 4, '20010-0066', 'Microfilmadoras '),
+(177, 4, '20010-0067', 'Mimeógrafos '),
+(178, 4, '20010-0068', 'Multígrafos '),
+(179, 4, '20010-0069', 'Neveras '),
+(180, 4, '20010-0070', 'Normógrafos '),
+(181, 4, '20010-0071', 'Numeradoras '),
+(182, 4, '20010-0072', 'Organigramas montados (ver cuadros) '),
+(183, 4, '20010-0073', 'Pantógrafos '),
+(184, 4, '20010-0074', 'Percheros '),
+(185, 4, '20010-0075', 'Perforadoras para mas de 2 ojetes '),
+(186, 4, '20010-0076', 'Pesa-cartas '),
+(187, 4, '20010-0077', 'Pizarrones '),
+(188, 4, '20010-0078', 'Planímetros '),
+(189, 4, '20010-0079', 'Planotecas '),
+(190, 4, '20010-0080', 'Plantillas de dibujo '),
+(191, 4, '20010-0081', 'Poltronas '),
+(192, 4, '20010-0082', 'Porta-copias '),
+(193, 4, '20010-0083', 'Prensas para copias '),
+(194, 4, '20010-0084', 'Protectoras de cheques '),
+(195, 4, '20010-0085', 'Proyectores para dibujo '),
+(196, 4, '20010-0086', 'Reglas '),
+(197, 4, '20010-0087', 'Relojes '),
+(198, 4, '20010-0088', 'Relojes de control '),
+(199, 4, '20010-0089', 'Relojes fechadores '),
+(200, 4, '20010-0090', 'Roperos '),
+(201, 4, '20010-0091', 'Saca-puntas '),
+(202, 4, '20010-0092', 'Sellos-prensa metálicos '),
+(203, 4, '20010-0093', 'Sillas para escritorios '),
+(204, 4, '20010-0094', 'Sofás '),
+(205, 4, '20010-0095', 'Soportes para sellos '),
+(206, 4, '20010-0096', 'Sumadoras '),
+(207, 4, '20010-0097', 'Tableros (ni pizarrones, ni carteleras) '),
+(208, 4, '20010-0098', 'Taburetes '),
+(209, 4, '20010-0099', 'Teléfonos (internos) '),
+(210, 4, '20010-0100', 'Transportadores '),
+(211, 4, '20010-0101', 'Televisores '),
+(212, 4, '20010-0102', 'Ventiladores '),
+(213, 4, '20010-0103', 'Vitrinas '),
+(214, 5, '20020-0001', 'Adaptador de bienes múltiples '),
+(215, 5, '20020-0002', 'Cadena de impresora intercambiable '),
+(216, 5, '20020-0003', 'Discos '),
+(217, 5, '20020-0004', 'Lectora óptica '),
+(218, 5, '20020-0005', 'Lectora de tarjeta '),
+(219, 5, '20020-0006', 'Lectora de cintas de papel '),
+(220, 5, '20020-0007', 'Microcomputador '),
+(221, 5, '20020-0008', 'Modulador y desmodulador (modem) '),
+(222, 5, '20020-0009', 'Perforadora de tarjeta '),
+(223, 5, '20020-0010', 'Perforadora de cinta de papel '),
+(224, 5, '20020-0011', 'Terminal con teclado '),
+(225, 5, '20020-0012', 'Unidad central de proceso (CPU) '),
+(226, 5, '20020-0013', 'Unidad de control de líneas remotas '),
+(227, 5, '20020-0014', 'Unidad de control local de terminales '),
+(228, 5, '20020-0015', 'Unidad de control remoto de terminales '),
+(229, 5, '20020-0016', 'Unidad de control de cinta '),
+(230, 5, '20020-0017', 'Unidad de control de impresora '),
+(231, 5, '20020-0018', 'Unidad de cinta magnética '),
+(232, 5, '20020-0019', 'Unidad de acceso directo (discos) '),
+(233, 5, '20020-0020', 'Unidad de diskettes '),
+(234, 5, '20020-0021', 'Unidad impresora '),
+(235, 5, '20020-0022', 'Visores de microfichas '),
+(236, 6, '20090-0001', 'Acondicionadores de aire '),
+(237, 6, '20090-0002', 'Acuarios '),
+(238, 6, '20090-0003', 'Alfombras '),
+(239, 6, '20090-0004', 'Anaqueles (ver estantes) '),
+(240, 6, '20090-0006', 'Aparadores '),
+(241, 6, '20090-0007', 'Aparatos desmanchadores para lavanderas '),
+(242, 6, '20090-0008', 'Armarios (ver escaparates) '),
+(243, 6, '20090-0010', 'Atomizadores '),
+(244, 6, '20090-0011', 'Azafates '),
+(245, 6, '20090-0012', 'Balanzas '),
+(246, 6, '20090-0013', 'Bancas y banquetas (ver bancos) '),
+(247, 6, '20090-0014', 'Bancos (asientos) '),
+(248, 6, '20090-0015', 'Bancos (mesas) '),
+(249, 6, '20090-0016', 'Banderas nacionales '),
+(250, 6, '20090-0017', 'Bañeras móviles '),
+(251, 6, '20090-0018', 'Bares '),
+(252, 6, '20090-0019', 'Barqueos '),
+(253, 6, '20090-0020', 'Bases para alfombras '),
+(254, 6, '20090-0021', 'Batidoras '),
+(255, 6, '20090-0022', 'Bibelots (ver objetos decorativos) '),
+(256, 6, '20090-0023', 'Biombos '),
+(257, 6, '20090-0024', 'Botiquines '),
+(258, 6, '20090-0025', 'Butacas (ver poltronas) '),
+(259, 6, '20090-0026', 'Burros (ver caballetes) '),
+(260, 6, '20090-0027', 'Caballetes '),
+(261, 6, '20090-0028', 'Cafeteras '),
+(262, 6, '20090-0029', 'Calderos '),
+(263, 6, '20090-0030', 'Calentadores '),
+(264, 6, '20090-0031', 'Camas '),
+(265, 6, '20090-0032', 'Canapés (ver sofás) '),
+(266, 6, '20090-0033', 'Cantaras '),
+(267, 6, '20090-0034', 'Carros de comida '),
+(268, 6, '20090-0035', 'Cocinas móviles '),
+(269, 6, '20090-0036', 'Cocinillas portátiles '),
+(270, 6, '20090-0037', 'Cofres '),
+(271, 6, '20090-0038', 'Cómodas '),
+(272, 6, '20090-0039', 'Congeladoras '),
+(273, 6, '20090-0040', 'Conservadoras '),
+(274, 6, '20090-0041', 'Consolas '),
+(275, 6, '20090-0042', 'Cortadoras de césped '),
+(276, 6, '20090-0043', 'Cortinas '),
+(277, 6, '20090-0044', 'Cortineros '),
+(278, 6, '20090-0045', 'Cunas '),
+(279, 6, '20090-0046', 'Chiffonieres (ver cómodas) '),
+(280, 6, '20090-0047', 'Chinchorros '),
+(281, 6, '20090-0048', 'Divanes (ver sofás) '),
+(282, 6, '20090-0049', 'Enfriadores de agua '),
+(283, 6, '20090-0050', 'Equipos para desperdicios '),
+(284, 6, '20090-0051', 'Escabeles '),
+(285, 6, '20090-0052', 'Escaparates '),
+(286, 6, '20090-0053', 'Escudos nacionales '),
+(287, 6, '20090-0054', 'Estantes '),
+(288, 6, '20090-0055', 'Espejos '),
+(289, 6, '20090-0056', 'Estufas móviles '),
+(290, 6, '20090-0057', 'Exprimidoras '),
+(291, 6, '20090-0058', 'Exprimidoras de lavandera '),
+(292, 6, '20090-0059', 'Filtros de agua '),
+(293, 6, '20090-0060', 'Floreros '),
+(294, 6, '20090-0061', 'Freidores '),
+(295, 6, '20090-0062', 'Gabinetes '),
+(296, 6, '20090-0063', 'Gaveteros (ver cómodas) '),
+(297, 6, '20090-0064', 'Grecas para el café '),
+(298, 6, '20090-0065', 'Hamacas '),
+(299, 6, '20090-0066', 'Jardineras móviles '),
+(300, 6, '20090-0067', 'Jarrones '),
+(301, 6, '20090-0068', 'Juegos de cristal '),
+(302, 6, '20090-0069', 'Juegos de dormitorio '),
+(303, 6, '20090-0070', 'Juegos de muebles de comedor '),
+(304, 6, '20090-0071', 'Juegos de muebles de recibo '),
+(305, 6, '20090-0072', 'Juegos de pesas para balanzas '),
+(306, 6, '20090-0073', 'Juego de porcelana '),
+(307, 6, '20090-0074', 'Lámparas móviles '),
+(308, 6, '20090-0075', 'Lavabos móviles '),
+(309, 6, '20090-0076', 'Lavacopas y vasos '),
+(310, 6, '20090-0077', 'Lavadoras de ropa '),
+(311, 6, '20090-0078', 'Lavaplatos móviles '),
+(312, 6, '20090-0079', 'Licuadoras '),
+(313, 6, '20090-0080', 'Máquinas ayudante de cocina '),
+(314, 6, '20090-0081', 'Máquinas amasadoras '),
+(315, 6, '20090-0082', 'Máquinas de afeitar '),
+(316, 6, '20090-0083', 'Máquinas de almidonar '),
+(317, 6, '20090-0084', 'Máquinas de coser '),
+(318, 6, '20090-0085', 'Máquinas de planchar '),
+(319, 6, '20090-0086', 'Máquinas para cortar carne '),
+(320, 6, '20090-0087', 'Máquinas para cortar jamón '),
+(321, 6, '20090-0088', 'Máquinas para fabricar cubos de hielo '),
+(322, 6, '20090-0089', 'Máquinas para hacer helados '),
+(323, 6, '20090-0090', 'Máquinas para lavar alfombras '),
+(324, 6, '20090-0091', 'Máquinas ralladoras '),
+(325, 6, '20090-0092', 'Máquinas secadoras de ropa '),
+(326, 6, '20090-0093', 'Marcadoras de ropa '),
+(327, 6, '20090-0094', 'Marmitas '),
+(328, 6, '20090-0095', 'Materos '),
+(329, 6, '20090-0096', 'Macedores '),
+(330, 6, '20090-0097', 'Mesas '),
+(331, 6, '20090-0098', 'Mesones '),
+(332, 6, '20090-0099', 'Molinos para carne '),
+(333, 6, '20090-0100', 'Molinos para granos '),
+(334, 6, '20090-0101', 'Mostradores '),
+(335, 6, '20090-0102', 'Neveras '),
+(336, 6, '20090-0103', 'Neveras-mostrador '),
+(337, 6, '20090-0104', 'Objetos decorativos '),
+(338, 6, '20090-0105', 'Ollas grandes '),
+(339, 6, '20090-0106', 'Paravanes (ver biombos) '),
+(340, 6, '20090-0107', 'Parrillas móviles '),
+(341, 6, '20090-0108', 'Peinadoras (ver tocadores) '),
+(342, 6, '20090-0109', 'Peladoras de papas '),
+(343, 6, '20090-0110', 'Percheros '),
+(344, 6, '20090-0111', 'Persianas '),
+(345, 6, '20090-0112', 'Planchas eléctricas '),
+(346, 6, '20090-0113', 'Platones '),
+(347, 6, '20090-0114', 'Poltronas '),
+(348, 6, '20090-0115', 'Pulidoras de pisos '),
+(349, 6, '20090-0116', 'Purificadores de agua '),
+(350, 6, '20090-0117', 'Radio-receptores '),
+(351, 6, '20090-0118', 'Rebanadas de fiambres '),
+(352, 6, '20090-0119', 'Recipientes '),
+(353, 6, '20090-0120', 'Repisas '),
+(354, 6, '20090-0121', 'Revisteros '),
+(355, 6, '20090-0122', 'Roperos '),
+(356, 6, '20090-0123', 'Sartenes '),
+(357, 6, '20090-0124', 'Secadores de ropa '),
+(358, 6, '20090-0125', 'Sillas '),
+(359, 6, '20090-0126', 'Sillones (ver poltronas) '),
+(360, 6, '20090-0127', 'Sillones de barbera '),
+(361, 6, '20090-0128', 'Sofás '),
+(362, 6, '20090-0129', 'Taburetes '),
+(363, 6, '20090-0130', 'Tapetes (ver alfombras) '),
+(364, 6, '20090-0131', 'Tarimas '),
+(365, 6, '20090-0132', 'Televisores '),
+(366, 6, '20090-0133', 'Tiendas de campaña '),
+(367, 6, '20090-0134', 'Tinajeros '),
+(368, 6, '20090-0135', 'Tocadores '),
+(369, 6, '20090-0136', 'Tostadoras '),
+(370, 6, '20090-0137', 'Vajillas de lujo '),
+(371, 6, '20090-0138', 'Video grabadores ');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvdmo14s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvdmo14s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ubvmov13_id` int(10) unsigned NOT NULL,
+  `ubvbie12_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ubvdmo14s_FKIndex1` (`ubvbie12_id`),
+  KEY `ubvdmo14s_FKIndex2` (`ubvmov13_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+
+--
+-- Volcado de datos para la tabla `ubvdmo14s`
+--
+
+INSERT INTO `ubvdmo14s` (`id`, `ubvmov13_id`, `ubvbie12_id`) VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 2, 3),
+(4, 3, 4),
+(5, 4, 5),
+(6, 4, 6),
+(7, 4, 7),
+(8, 5, 4),
+(9, 6, 5),
+(10, 6, 2),
+(11, 7, 3),
+(12, 7, 1),
+(13, 8, 1),
+(14, 8, 2),
+(15, 8, 3),
+(16, 8, 5),
+(17, 9, 1),
+(18, 9, 2),
+(19, 9, 3),
+(20, 9, 5),
+(21, 9, 6),
+(22, 10, 1),
+(23, 10, 2),
+(24, 10, 3),
+(25, 11, 2),
+(26, 11, 4),
+(27, 11, 3),
+(28, 12, 2),
+(29, 13, 8),
+(30, 13, 9),
+(31, 13, 10),
+(32, 14, 9),
+(33, 14, 10),
+(34, 15, 10),
+(35, 16, 1),
+(36, 17, 11),
+(37, 18, 7),
+(38, 18, 8),
+(39, 18, 11),
+(40, 19, 12),
+(41, 20, 12),
+(42, 21, 2),
+(43, 22, 2),
+(44, 23, 13),
+(45, 24, 13),
+(46, 25, 14);
+
+--
+-- Disparadores `ubvdmo14s`
+--
+DROP TRIGGER IF EXISTS `tginsertdmo`;
+DELIMITER //
+CREATE TRIGGER `tginsertdmo` AFTER INSERT ON `ubvdmo14s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'INSERT',NOW(),'ubvdmo14s',new.id);
+    END
+//
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvdtm07s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvdtm07s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ubvtmv02_id` int(10) unsigned NOT NULL,
+  `codigo` varchar(3) NOT NULL,
+  `nombre` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ubvdtm07_FKIndex1` (`ubvtmv02_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
+
+--
+-- Volcado de datos para la tabla `ubvdtm07s`
+--
+
+INSERT INTO `ubvdtm07s` (`id`, `ubvtmv02_id`, `codigo`, `nombre`) VALUES
+(1, 1, '01', 'Compras'),
+(2, 1, '02', 'Inventario'),
+(3, 1, '03', 'Fabricación o producción de materiales bienes'),
+(4, 1, '04', 'Omisión en inventario inicial'),
+(5, 1, '05', 'Ingreso provisional de bienes materiales proveniente de programas especiales'),
+(6, 1, '06', 'Ingreso definitivo de bienes y materiales proveniente de programas especiales'),
+(7, 1, '07', 'Devolución y materiales robados, hurtados o perdidos'),
+(8, 1, '08', 'Aparición de bienes y materiales desincorporados por causas imputables a funcionarios o empleados'),
+(9, 1, '11', 'Donaciones'),
+(10, 1, '12', 'Permuta'),
+(11, 1, '13', 'Ingreso provisional de bienes dados en comodato'),
+(12, 1, '14', 'Ingreso definitivo de bienes dados en comodato'),
+(13, 1, '15', 'Herencia vacantes'),
+(14, 1, '16', 'Decomiso de bienes y materiales'),
+(15, 1, '17', 'Ingreso provisional de bienes y materiales bajo guarda judicial'),
+(16, 1, '18', 'Ingreso definitivo de bienes y materiales que habían sido registrados provisionalmente bajo guarda judicial'),
+(17, 1, '19', 'Incorporación por otros conceptos '),
+(18, 2, '20', 'Recepción de bienes o materiales procedentes de almacén de la administración central'),
+(19, 2, '21', 'Recepción de bienes o materiales de otras dependencias del organismo ordenador de compromisos y pagos '),
+(20, 2, '22', 'Recepción de bienes o materiales de otros organismos ordenadores de compromisos y pagos'),
+(21, 2, '23', 'Recepción de bienes o materiales procedentes de otros organismos de las administración publica'),
+(22, 2, '24', 'Devolución de bienes prestados a contratistas'),
+(23, 2, '25', 'Incorporación por cambio de grupo,cuentay subcuenta'),
+(24, 2, '26', 'Correcciones de desincorporaciones '),
+(25, 2, '27', 'Otros cargos por resignaciones'),
+(26, 2, '30', 'Entrega de bienes o materiales por parte de almacén'),
+(27, 2, '31', 'Entrega de bienes o materiales a otras dependencias del organismo ordenador de compromisos y pagos'),
+(28, 2, '32', 'Entrega de bienes o materiales a otros organismos ordenadores de compromisos y pagos'),
+(29, 2, '33', 'Entrega de bienes o materiales a otros organismos ordenadores de la Administración Publica Nacional'),
+(30, 2, '34', 'Préstamo de bienes contratistas'),
+(31, 2, '35', 'Desincorporacion por cambio de grupo, cuenta o subcuenta'),
+(32, 2, '36', 'Correcciones de incorporaciones'),
+(33, 2, '37', 'Ajustes por cambio del método de depreciación'),
+(34, 2, '39', 'Otros descargos por reasignaciones '),
+(35, 3, '40', 'Error de incorporación de bienes o materiales'),
+(36, 3, '41', 'Pase a situación de desuso para reasignacion, venta o disposición final'),
+(37, 3, '42', 'Bienes o materiales en custodia en el almacén '),
+(38, 3, '43', 'Venta'),
+(39, 3, '44', 'Cesiones sin cargos a organismos del sector privado.'),
+(40, 3, '45', 'Cesiones sin cargos a los entes descentralizados territorialmente '),
+(41, 3, '46', 'Perdida de bienes con formulación de cargos'),
+(42, 3, '47', 'Robo o hurto de bienes o materiales'),
+(43, 3, '48', 'Otras perdidas de bienes o materiales no culposas '),
+(44, 3, '49', 'Destrucción o incineración de bienes o materiales'),
+(45, 3, '50', 'Desarme o desmantelamiento de bienes'),
+(46, 3, '51', 'Inservibilidad '),
+(47, 3, '52', 'Deterioro'),
+(48, 3, '53', 'Demolición'),
+(49, 3, '57', 'Desincorporacion por permuta '),
+(50, 3, '58', 'Desincorporacion por por donación '),
+(51, 3, '59', 'Desincorporacion por otros conceptos ');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvdus10s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvdus10s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ubvuad09_id` int(10) unsigned NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `estatus` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ubvdus10s_FKIndex1` (`ubvuad09_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `ubvdus10s`
+--
+
+INSERT INTO `ubvdus10s` (`id`, `ubvuad09_id`, `nombre`, `estatus`) VALUES
+(1, 1, 'ALMACEN A', '1'),
+(2, 2, 'NOMINA', '1'),
+(3, 4, 'DESARROLLO DE SOFTWARE', '1'),
+(4, 4, 'MANTENIMIENTO', '1'),
+(5, 3, 'ATENCION', '1'),
+(6, 5, 'DESINCORPORACIONES', '1');
+
+--
+-- Disparadores `ubvdus10s`
+--
+DROP TRIGGER IF EXISTS `tginsertdus`;
+DELIMITER //
+CREATE TRIGGER `tginsertdus` AFTER INSERT ON `ubvdus10s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'INSERT',NOW(),'ubvdus10s',new.id);
+    END
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tgupdatedus`;
+DELIMITER //
+CREATE TRIGGER `tgupdatedus` AFTER UPDATE ON `ubvdus10s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'UPDATE',NOW(),'ubvdus10s',old.id);
+    END
+//
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvdus10s_ubvmov13s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvdus10s_ubvmov13s` (
+  `ubvdus10_id` int(10) unsigned NOT NULL,
+  `ubvmov13_id` int(10) unsigned NOT NULL,
+  `tipo` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`ubvdus10_id`,`ubvmov13_id`),
+  KEY `ubvdus10s_ubvmov13s_FKIndex1` (`ubvdus10_id`),
+  KEY `ubvdus10s_ubvmov13s_FKIndex2` (`ubvmov13_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `ubvdus10s_ubvmov13s`
+--
+
+INSERT INTO `ubvdus10s_ubvmov13s` (`ubvdus10_id`, `ubvmov13_id`, `tipo`) VALUES
+(1, 1, '2'),
+(1, 2, '2'),
+(1, 3, '2'),
+(1, 4, '2'),
+(1, 5, '3'),
+(1, 6, '1'),
+(1, 7, '1'),
+(1, 8, '2'),
+(1, 9, '1'),
+(1, 10, '2'),
+(1, 11, '1'),
+(1, 13, '2'),
+(1, 14, '1'),
+(1, 16, '1'),
+(1, 17, '2'),
+(1, 18, '1'),
+(1, 19, '2'),
+(1, 20, '1'),
+(1, 21, '2'),
+(1, 22, '1'),
+(1, 23, '2'),
+(1, 24, '1'),
+(1, 25, '2'),
+(2, 18, '2'),
+(2, 20, '2'),
+(3, 22, '2'),
+(5, 6, '2'),
+(5, 7, '2'),
+(5, 8, '1'),
+(5, 9, '2'),
+(5, 10, '1'),
+(5, 11, '2'),
+(5, 12, '3'),
+(5, 14, '2'),
+(5, 15, '3'),
+(5, 21, '1'),
+(5, 24, '2'),
+(6, 16, '2');
+
+--
+-- Disparadores `ubvdus10s_ubvmov13s`
+--
+DROP TRIGGER IF EXISTS `tginsertdusmov`;
+DELIMITER //
+CREATE TRIGGER `tginsertdusmov` AFTER INSERT ON `ubvdus10s_ubvmov13s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id,campo2_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'INSERT',NOW(),'ubvdus10s_ubvmov13s',new.ubvdus10_id,new.ubvmov13_id);
+    END
+//
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvmar01s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvmar01s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `ubvmar01s`
+--
+
+INSERT INTO `ubvmar01s` (`id`, `nombre`) VALUES
+(1, 'HUAWEY'),
+(2, 'VIT'),
+(3, 'SONY'),
+(4, 'ONE'),
+(5, 'MOTOROLA'),
+(6, 'SAMSUNG');
+
+--
+-- Disparadores `ubvmar01s`
+--
+DROP TRIGGER IF EXISTS `tginsertmar`;
+DELIMITER //
+CREATE TRIGGER `tginsertmar` AFTER INSERT ON `ubvmar01s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'INSERT',NOW(),'ubvmar01s',new.id);
+    END
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tgupdatemar`;
+DELIMITER //
+CREATE TRIGGER `tgupdatemar` AFTER UPDATE ON `ubvmar01s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'UPDATE',NOW(),'ubvmar01s',old.id);
+    END
+//
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvmov13s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvmov13s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ubvdtm07_id` int(10) unsigned NOT NULL,
+  `fecha` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ubvmov13s_FKIndex2` (`ubvdtm07_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+
+--
+-- Volcado de datos para la tabla `ubvmov13s`
+--
+
+INSERT INTO `ubvmov13s` (`id`, `ubvdtm07_id`, `fecha`) VALUES
+(1, 1, '2013-08-27'),
+(2, 1, '2013-08-27'),
+(3, 1, '2013-08-28'),
+(4, 1, '2013-08-28'),
+(5, 33, '2013-08-28'),
+(6, 18, '2013-08-28'),
+(7, 18, '2013-08-28'),
+(8, 18, '2013-08-28'),
+(9, 22, '2013-08-28'),
+(10, 21, '2013-08-28'),
+(11, 18, '2013-08-28'),
+(12, 33, '2013-08-28'),
+(13, 1, '2013-08-28'),
+(14, 18, '2013-08-28'),
+(15, 33, '2013-08-28'),
+(16, 35, '2013-08-28'),
+(17, 5, '2013-08-30'),
+(18, 26, '2013-08-30'),
+(19, 5, '2013-09-01'),
+(20, 20, '2013-09-01'),
+(21, 19, '2013-09-02'),
+(22, 18, '2013-09-02'),
+(23, 1, '2013-09-10'),
+(24, 18, '2013-09-15'),
+(25, 16, '2013-09-15');
+
+--
+-- Disparadores `ubvmov13s`
+--
+DROP TRIGGER IF EXISTS `tginsertmov`;
+DELIMITER //
+CREATE TRIGGER `tginsertmov` AFTER INSERT ON `ubvmov13s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'INSERT',NOW(),'ubvmov13s',new.id);
+    END
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tgupdatemov`;
+DELIMITER //
+CREATE TRIGGER `tgupdatemov` AFTER UPDATE ON `ubvmov13s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'UPDATE',NOW(),'ubvmov13s',old.id);
+    END
+//
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvper11s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvper11s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ubvcar05_id` int(10) unsigned NOT NULL,
+  `ubvdus10_id` int(10) unsigned NOT NULL,
+  `cedula` int(8) unsigned NOT NULL,
+  `nombre` varchar(60) NOT NULL,
+  `telefono` varchar(12) NOT NULL,
+  `estatus` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ubvper11s_FKIndex1` (`ubvdus10_id`),
+  KEY `ubvper11s_FKIndex2` (`ubvcar05_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `ubvper11s`
+--
+
+INSERT INTO `ubvper11s` (`id`, `ubvcar05_id`, `ubvdus10_id`, `cedula`, `nombre`, `telefono`, `estatus`) VALUES
+(1, 1, 1, 16983528, 'LEONARDO VIVAS', '0416-6717265', '1'),
+(2, 2, 2, 18419039, 'PEREZ FERNANDEZ JOSUE', '0416-9104418', '1'),
+(3, 3, 5, 17811581, 'MARIA CONTRERAS', '0416-9104418', '1'),
+(4, 1, 3, 16999999, 'MARLENY FERNANDE', '0277-7471272', '1'),
+(5, 1, 5, 2763867, 'VICTOR PERE', '0277-7471272', '1');
+
+--
+-- Disparadores `ubvper11s`
+--
+DROP TRIGGER IF EXISTS `tginsertper`;
+DELIMITER //
+CREATE TRIGGER `tginsertper` AFTER INSERT ON `ubvper11s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'INSERT',NOW(),'ubvper11s',new.id);
+    END
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tgupdateper`;
+DELIMITER //
+CREATE TRIGGER `tgupdateper` AFTER UPDATE ON `ubvper11s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'UPDATE',NOW(),'ubvper11s',old.id);
+    END
+//
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvsub06s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvsub06s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ubvcoo03_id` int(10) unsigned NOT NULL,
+  `ciudad` varchar(50) DEFAULT NULL,
+  `nombre` varchar(70) DEFAULT NULL,
+  `direccion` varchar(100) DEFAULT NULL,
+  `estatus` char(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ubvsub06s_FKIndex1` (`ubvcoo03_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `ubvsub06s`
+--
+
+INSERT INTO `ubvsub06s` (`id`, `ubvcoo03_id`, `ciudad`, `nombre`, `direccion`, `estatus`) VALUES
+(1, 1, 'SAN CRISTOBAL', 'SAN CRISTOBAL', 'AV UNIVERSIDAD', '1'),
+(2, 1, 'LA GRITA', 'ALDEA LA GRITA', 'PLAZA CACERES', '1'),
+(3, 1, 'PREGONERO', 'ALDEA PREGONERO', 'CALLE 3', '1'),
+(4, 1, 'RUBIO', 'ALDEA RUBIO', 'CALLE 3 NUMERO 5', '1');
+
+--
+-- Disparadores `ubvsub06s`
+--
+DROP TRIGGER IF EXISTS `tginsertsub`;
+DELIMITER //
+CREATE TRIGGER `tginsertsub` AFTER INSERT ON `ubvsub06s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'INSERT',NOW(),'ubvsub06s',new.id);
+    END
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tgupdatesub`;
+DELIMITER //
+CREATE TRIGGER `tgupdatesub` AFTER UPDATE ON `ubvsub06s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'UPDATE',NOW(),'ubvsub06s',old.id);
+    END
+//
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvtmv02s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvtmv02s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `ubvtmv02s`
+--
+
+INSERT INTO `ubvtmv02s` (`id`, `nombre`) VALUES
+(1, 'Incorp'),
+(2, 'Reasig'),
+(3, 'Desinc');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvtua15s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvtua15s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `ubvtua15s`
+--
+
+INSERT INTO `ubvtua15s` (`id`, `nombre`) VALUES
+(1, 'ALMACEN'),
+(2, 'DEPARTAMENTO'),
+(3, 'DESINCORPORACIONES');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubvuad09s`
+--
+
+CREATE TABLE IF NOT EXISTS `ubvuad09s` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ubvtua15_id` int(10) unsigned NOT NULL,
+  `ubvsub06_id` int(10) unsigned NOT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `telefono` varchar(15) DEFAULT NULL,
+  `estatus` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ubvuad09s_FKIndex1` (`ubvsub06_id`),
+  KEY `ubvuad09s_FKIndex2` (`ubvtua15_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `ubvuad09s`
+--
+
+INSERT INTO `ubvuad09s` (`id`, `ubvtua15_id`, `ubvsub06_id`, `nombre`, `telefono`, `estatus`) VALUES
+(1, 1, 1, 'ALMACEN', '0416-9104418', '1'),
+(2, 2, 1, 'RRHH', '0416-9104418', '1'),
+(3, 2, 3, 'ATENCION AL PUBLICO', '0277-7471272', '1'),
+(4, 2, 1, 'SISTEMAS', '0416-9104418', '1'),
+(5, 3, 1, 'DESINCORPORACIONES', '0416-9104418', '1');
+
+--
+-- Disparadores `ubvuad09s`
+--
+DROP TRIGGER IF EXISTS `tginsertuad`;
+DELIMITER //
+CREATE TRIGGER `tginsertuad` AFTER INSERT ON `ubvuad09s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'INSERT',NOW(),'ubvuad09s',new.id);
+    END
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tgupdateuad`;
+DELIMITER //
+CREATE TRIGGER `tgupdateuad` AFTER UPDATE ON `ubvuad09s`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'UPDATE',NOW(),'ubvuad09s',old.id);
+    END
+//
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ubvper11_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` char(40) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `estatus` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  KEY `users_FKIndex1` (`ubvper11_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `ubvper11_id`, `username`, `password`, `group_id`, `created`, `modified`, `estatus`) VALUES
+(1, 2, 'JOSUE', '21a2980e99efa92a403db974e7873c8bf137ded1', 1, '2013-07-06 14:19:00', '2013-08-22 19:37:46', '1'),
+(2, 1, 'LEONARDO', '467b4643d22e0b334a4460b150457676b8cb73fc', 2, '2013-08-25 22:53:15', '2013-08-25 22:53:15', '1'),
+(3, 4, 'MARLENY', 'cab1a006250745efc1d6e51663e50aabada2a673', 3, '2013-09-23 22:08:33', '2013-09-23 22:08:33', '1');
+
+--
+-- Disparadores `users`
+--
+DROP TRIGGER IF EXISTS `tginsertuser`;
+DELIMITER //
+CREATE TRIGGER `tginsertuser` AFTER INSERT ON `users`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'INSERT',NOW(),'users',new.id);
+    END
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tgupdateuser`;
+DELIMITER //
+CREATE TRIGGER `tgupdateuser` AFTER UPDATE ON `users`
+ FOR EACH ROW BEGIN
+	INSERT INTO  ubvbit16s (id ,user_id,usuario,servidor,operacion,fecha,tabla,campo_id)
+	VALUES (NULL ,SUBSTRING(USER(),1,(INSTR(USER(),'@')-1)) , '',SUBSTRING(USER(), (INSTR(USER(),'@')+1)),'UPDATE',NOW(),'users',old.id);
+    END
+//
+DELIMITER ;

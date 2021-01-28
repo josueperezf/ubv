@@ -1,0 +1,41 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color:#FFFFFF;	
+	/*desde demo*/
+	font-family: 'Electrolize', Arial, sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+}
+/* ~~ Selectores de elemento/etiqueta ~~ */
+ul, ol, dl { 
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;
+	padding-right: 15px;
+	padding-left: 15px; 
+}
+a img { /* este selector elimina el borde azul predeterminado que se muestra en algunos navegadores alrededor de una imagen cuando está rodeada por un vínculo */
+	border: none;
+}
+/* ~~ este contenedor de anchura fija rodea a las demás divs ~~ */
+.container {
+	width: auto;
+	margin: 0 auto; /* el valor automático de los lados, unido a la anchura, centra el diseño */
+	min-height:765px;  /*si lo coloco como comentario le quito el div blanco es solo de prueba para *J O S U E**/
+	height:auto;
+}
+.sidebar1 { /* clase que se le aplica al div que contiene al menu*/
+	float: left;
+	width:200px;
+	margin-right:20px;
+	padding-bottom: 10px;
+}
+.content {
+
+	padding: 50px 0; /* separacion del contenido del tope o banner*/
+	width: 700px;
+	float: left;
+}

@@ -1,0 +1,2 @@
+$(document).ready(function () {$("#Ubvdus10").bind("change", function (event) {$.ajax({async:true, data:$("#Ubvdus10").serialize(), dataType:"html", success:function (data, textStatus) {$("#depDest").html(data);}, type:"post", url:"\/ubv\/ubvmov13s\/depDestino"});
+return false;});});

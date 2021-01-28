@@ -1,0 +1,2 @@
+$(document).ready(function () {$("#depend").bind("change", function (event) {$.ajax({async:true, data:$("#depend").serialize(), dataType:"html", success:function (data, textStatus) {$("#fechas").html(data);}, type:"post", url:"\/ubv\/ubvmov13s\/listarFechas"});
+return false;});});
